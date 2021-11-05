@@ -4,7 +4,16 @@
   "description": "A personal dashboard to track my investments.",
   "main": "index.js",
   "scripts": {
-    "start": "yarn parcel src/index.html"
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "start": "parcel src/index.html",
+    "build": "parcel src/index.html",
+    "test": "jest --watch"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
+    ]
   },
   "author": "Nicolas Lacaze",
   "license": "ISC",
@@ -13,8 +22,17 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@parcel/babel-preset-env": "^2.0.0",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "babel-jest": "^27.3.1",
     "eslint": "^8.1.0",
+    "eslint-plugin-jest": "^25.2.3",
     "eslint-plugin-react": "^7.26.1",
+    "jest": "^27.3.1",
     "parcel": "^2.0.0",
     "prettier": "^2.4.1"
   }
