@@ -1,0 +1,21 @@
+{
+  "name": "investment-dashboard",
+  "version": "1.0.0",
+  "description": "A personal dashboard to track my investments.",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn parcel src/index.html"
+  },
+  "author": "Nicolas Lacaze",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "parcel": "^2.0.0",
+    "prettier": "^2.4.1"
+  }
+}
