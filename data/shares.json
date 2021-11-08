@@ -1,27 +1,27 @@
 [
   {
-    "id": "tt2975590",
+    "id": 1,
     "name": "Black Hills Corp.",
     "ticker": "BKH",
     "industry": "Multi-Utilities",
     "numberOfYears": 50
   },
   {
-    "id": "tt0120201",
+    "id": 2,
     "name": "International Business Machines",
     "ticker": "IBM",
     "industry": "IT Services",
     "numberOfYears": 25
   },
   {
-    "id": "tt1276104",
+    "id": 3,
     "name": "3M Company",
     "ticker": "MMM",
     "industry": "Industrial Conglomerates",
     "numberOfYears": 63
   },
   {
-    "id": "tt1226774",
+    "id": 4,
     "name": "Walgreens Boots Alliance Inc.",
     "ticker": "WBA",
     "industry": "Food & Staples Retailing",
