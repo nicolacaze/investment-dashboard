@@ -1,6 +1,6 @@
 /* eslint-disable */
 const readXlsxFile = require("read-excel-file/node");
-const path = require("path");
+const fetch = require("node-fetch");
 const { v4: uuid } = require("uuid");
 
 const { schema } = require("./schema");
@@ -18,12 +18,13 @@ function transformData(data) {
 }
 
 async function parseExcel() {
-  const pathToExcel = path.join(__dirname, "../../", "data/sample.xlsx");
   const CHAMPIONS_LIST_SHEET_NUMBER = 2;
 
   let result;
+
   try {
-    result = await readXlsxFile(pathToExcel, {
+    const stream = await fetch(process.env.CLOUDFRONT_SAMPLE_FILE_URL);
+    result = await readXlsxFile(stream.body, {
       sheet: CHAMPIONS_LIST_SHEET_NUMBER,
       schema,
       transformData,
