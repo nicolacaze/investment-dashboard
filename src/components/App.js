@@ -50,6 +50,11 @@ const App = () => {
           </label>
         </p>
         <p>
+          <label>
+            File: <input type="file" name="excel" />
+          </label>
+        </p>
+        <p>
           <button type="submit">Send</button>
         </p>
       </form>
