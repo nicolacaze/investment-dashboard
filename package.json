@@ -2,7 +2,7 @@
   "name": "investment-dashboard",
   "version": "1.0.0",
   "description": "A personal dashboard to track my investments.",
-  "main": "dist/index.html",
+  "default": "index.html",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
