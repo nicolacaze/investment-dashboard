@@ -1,10 +1,9 @@
 /* eslint-disable */
-exports.handler = async (event, context) => {
-  console.log("FROM SUBMISSION FUNCTION");
-  console.log(event);
-  console.log(context);
-  return {
+exports.handler = (event, context, callback) => {
+  const body = JSON.parse(event.body).payload;
+  console.log(body);
+  return callback(null, {
     statusCode: 200,
-    body: JSON.stringify(event),
-  };
+    body: "FROM SUBMISSION FUNCTION",
+  });
 };
