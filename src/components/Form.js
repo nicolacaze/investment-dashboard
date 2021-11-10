@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 
-function encode(data) {
-  const formData = new FormData();
-
-  for (const key of Object.keys(data)) {
-    formData.append(key, data[key]);
-  }
-
-  return formData;
-}
+import { encode } from "../utils";
 
 const Form = () => {
   const [form, setForm] = useState({});
