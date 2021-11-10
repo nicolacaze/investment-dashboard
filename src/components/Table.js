@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
+
 import TableRow from "./TableRow";
 
-const Table = () => {
-  const [shares, setShares] = useState([]);
-
-  useEffect(() => {
-    fetch("/.netlify/functions/get-shares")
-      .then((response) => response.json())
-      .then((response) => setShares(response))
-      .catch((error) => console.log(error));
-  }, []);
-
+const Table = ({ shares }) => {
   return (
     <>
       <table>
@@ -40,6 +33,27 @@ const Table = () => {
       </table>
     </>
   );
+};
+
+Table.propTypes = {
+  shares: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      ticker: PropTypes.string,
+      industry: PropTypes.string,
+      numberOfYears: PropTypes.number,
+      price: PropTypes.number,
+      dividendYield: PropTypes.number,
+      annualizedDividend: PropTypes.number,
+      threeYearsDividendGrowthRate: PropTypes.number,
+      fiveYearsDividendGrowthRate: PropTypes.number,
+      tenYearsDividendGrowthRate: PropTypes.number,
+      fairValue: PropTypes.string,
+      freeCashFlowPerShare: PropTypes.number,
+      priceEarningsRatio: PropTypes.number,
+    })
+  ),
 };
 
 export default Table;
