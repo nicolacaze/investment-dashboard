@@ -17,14 +17,14 @@ function transformData(data) {
   return data.slice(2);
 }
 
-async function parseExcel() {
+async function parseExcel(excelFileURL) {
   const CHAMPIONS_LIST_SHEET_NUMBER = 2;
 
-  let result;
+  let excelFile;
 
   try {
-    const stream = await fetch(process.env.CLOUDFRONT_SAMPLE_FILE_URL);
-    result = await readXlsxFile(stream.body, {
+    const response = await fetch(excelFileURL);
+    excelFile = await readXlsxFile(response.body, {
       sheet: CHAMPIONS_LIST_SHEET_NUMBER,
       schema,
       transformData,
@@ -33,7 +33,7 @@ async function parseExcel() {
     console.error("Error while parsing the excel file: ", error);
   }
 
-  const dataWithIds = addIds(result.rows);
+  const dataWithIds = addIds(excelFile.rows);
 
   return dataWithIds;
 }
