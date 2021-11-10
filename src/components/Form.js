@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function encode(data) {
   const formData = new FormData();
@@ -10,8 +10,7 @@ function encode(data) {
   return formData;
 }
 
-const App = () => {
-  const [shares, setShares] = useState([]);
+const Form = () => {
   const [form, setForm] = useState({});
 
   const handleChange = (e) => {
@@ -34,37 +33,8 @@ const App = () => {
     }).catch((error) => console.error(error));
   };
 
-  useEffect(() => {
-    fetch("/.netlify/functions/get-shares")
-      .then((response) => response.json())
-      .then((response) => setShares(response))
-      .catch((error) => console.log(error));
-  }, []);
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Ticker</th>
-            <th>Industry</th>
-            <th>Number of years</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shares.length > 0 &&
-            shares.map((share) => {
-              return (
-                <tr key={share.id}>
-                  <td>{share.name}</td>
-                  <td>{share.ticker}</td>
-                  <td>{share.industry}</td>
-                  <td>{share.numberOfYears}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+    <>
       <form name="contact" method="post" onSubmit={handleSubmit}>
         <input type="hidden" name="form-name" value="contact" />
         <p>
@@ -93,8 +63,8 @@ const App = () => {
           <button type="submit">Send</button>
         </p>
       </form>
-    </div>
+    </>
   );
 };
 
-export default App;
+export default Form;
