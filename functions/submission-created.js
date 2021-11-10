@@ -4,10 +4,15 @@ const { parseExcel } = require("./utils/parser");
 
 exports.handler = async (event, context, callback) => {
   const body = JSON.parse(event.body);
+  console.log("BODY", body);
 
   const excelFileURL = body.payload.human_fields.Excel;
 
+  console.log("EXCEL FILE URL", excelFileURL);
+
   const data = await parseExcel(excelFileURL);
+
+  console.log("DATA", data);
 
   const result = await queryHasura({
     query: `
