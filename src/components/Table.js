@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TableRow from "./TableRow";
 
 const Table = () => {
   const [shares, setShares] = useState([]);
@@ -24,14 +25,7 @@ const Table = () => {
         <tbody>
           {shares.length > 0 &&
             shares.map((share) => {
-              return (
-                <tr key={share.id}>
-                  <td>{share.name}</td>
-                  <td>{share.ticker}</td>
-                  <td>{share.industry}</td>
-                  <td>{share.numberOfYears}</td>
-                </tr>
-              );
+              return <TableRow key={share.id} share={share} />;
             })}
         </tbody>
       </table>
