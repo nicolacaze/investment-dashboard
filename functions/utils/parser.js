@@ -15,8 +15,8 @@ const EXCLUDED_INDUSTRIES = [
   "Tobacco",
 ];
 
-function getColumnKeysPosition(rows) {
-  return rows[0].reduce((columnKeysPosition, cell, index) => {
+function getColumnKeysPosition(headers) {
+  return headers.reduce((columnKeysPosition, cell, index) => {
     switch (cell) {
       case "No Years":
         return {
@@ -44,8 +44,10 @@ function getColumnKeysPosition(rows) {
   }, {});
 }
 
-function removeFirstTwoRows(rows) {
-  return rows.slice(2);
+function separateHeadersFromTable(rows) {
+  // It is important to remove the first rows before applying any filters
+  const HEADERS_INDEX = 2;
+  return [rows[HEADERS_INDEX], rows.slice(HEADERS_INDEX)];
 }
 
 function getSharesAboveSP500Average(rows, columnKeysPosition) {
@@ -79,15 +81,16 @@ function excludeGivenIndustries(rows, columnKeysPosition) {
 }
 
 function applyFilters(rows) {
-  // It is important to remove the first rows before applying any filters
-  rows = removeFirstTwoRows(rows);
+  let [headers, table] = separateHeadersFromTable(rows);
 
-  const columnKeysPosition = getColumnKeysPosition(rows);
-  rows = getSharesAboveSP500Average(rows, columnKeysPosition);
-  rows = getSharesWithMinimumDividendStreak(rows, columnKeysPosition);
-  rows = getSharesWithMinimumDividendGrowth(rows, columnKeysPosition);
-  rows = excludeGivenIndustries(rows, columnKeysPosition);
-  return rows;
+  const columnKeysPosition = getColumnKeysPosition(headers);
+
+  table = getSharesAboveSP500Average(table, columnKeysPosition);
+  table = getSharesWithMinimumDividendStreak(table, columnKeysPosition);
+  table = getSharesWithMinimumDividendGrowth(table, columnKeysPosition);
+  table = excludeGivenIndustries(table, columnKeysPosition);
+
+  return [headers, ...table];
 }
 
 function addIdToRows(rows) {
@@ -112,6 +115,7 @@ async function parseExcel(excelFileURL) {
   }
 
   const dataWithIds = addIdToRows(excelFile.rows);
+  // console.log(dataWithIds);
   // const dataWithIds = addIdToRows(excelFile);
 
   return dataWithIds;
