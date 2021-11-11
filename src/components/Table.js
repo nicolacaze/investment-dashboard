@@ -20,6 +20,15 @@ const Table = () => {
             <th>Ticker</th>
             <th>Industry</th>
             <th>Number of years</th>
+            <th>Price</th>
+            <th>Dividend yield</th>
+            <th>Annualized dividend</th>
+            <th>3DGR</th>
+            <th>5DGR</th>
+            <th>10DGR</th>
+            <th>Fair value</th>
+            <th>FCF/Share</th>
+            <th>P/E</th>
           </tr>
         </thead>
         <tbody>
