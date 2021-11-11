@@ -104,7 +104,7 @@ async function parseExcel(excelFileURL) {
   let excelFile;
 
   try {
-    const response = await fetch(process.env.CLOUDFRONT_SAMPLE_FILE_URL);
+    const response = await fetch(excelFileURL);
     excelFile = await readXlsxFile(response.body, {
       sheet: ALL_COMPANIES_SHEET_NUMBER,
       schema,
@@ -115,8 +115,6 @@ async function parseExcel(excelFileURL) {
   }
 
   const dataWithIds = addIdToRows(excelFile.rows);
-  // console.log(dataWithIds);
-  // const dataWithIds = addIdToRows(excelFile);
 
   return dataWithIds;
 }

@@ -3,9 +3,9 @@ const { queryHasura } = require("./utils/hasura");
 const { parseExcel } = require("./utils/parser");
 
 exports.handler = async (event, context) => {
-  // const body = JSON.parse(event.body);
-  // const excelFileURL = body.payload.human_fields.Excel;
-  const data = await parseExcel();
+  const body = JSON.parse(event.body);
+  const excelFileURL = body.payload.human_fields.Excel;
+  const data = await parseExcel(excelFileURL);
 
   // Remove all shares from table before adding new ones
   await queryHasura({
