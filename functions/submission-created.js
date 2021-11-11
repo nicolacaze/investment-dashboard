@@ -2,7 +2,7 @@
 const { queryHasura } = require("./utils/hasura");
 const { parseExcel } = require("./utils/parser");
 
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event, context) => {
   // const body = JSON.parse(event.body);
   // const excelFileURL = body.payload.human_fields.Excel;
   const data = await parseExcel();
@@ -47,8 +47,8 @@ exports.handler = async (event, context, callback) => {
     },
   });
 
-  return callback(null, {
+  return {
     statusCode: 200,
     body: JSON.stringify(result),
-  });
+  };
 };
