@@ -6,7 +6,7 @@ import Form from "../components/Form";
 const UploadFile = () => {
   return (
     <>
-      <h1>This is Home</h1>
+      <h1>Upload file</h1>
       <Link to="/">Back</Link>
       <Form />
     </>

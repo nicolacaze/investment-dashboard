@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
+import { getShares } from "./utils/api";
 
 const App = () => {
   const [shares, setShares] = useState([]);
 
   useEffect(() => {
-    fetch("/.netlify/functions/get-shares")
-      .then((response) => response.json())
-      .then((response) => setShares(response))
+    getShares()
+      .then((shares) => setShares(shares))
       .catch((error) => console.log(error));
   }, []);
 
