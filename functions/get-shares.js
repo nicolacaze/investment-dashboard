@@ -11,6 +11,15 @@ exports.handler = async () => {
           ticker
           industry
           numberOfYears
+          price
+          dividendYield
+          annualizedDividend
+          threeYearsDividendGrowthRate
+          fiveYearsDividendGrowthRate
+          tenYearsDividendGrowthRate
+          freeCashFlowPerShare
+          fairValue
+          priceEarningsRatio
         }
       }
     `,
