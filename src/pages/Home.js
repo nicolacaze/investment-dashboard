@@ -9,6 +9,7 @@ const Home = ({ shares }) => {
     <>
       <h1>This is Home</h1>
       <Link to="/upload-file">Upload file</Link>
+      <Link to="/login">Login</Link>
       <Table shares={shares} />
     </>
   );

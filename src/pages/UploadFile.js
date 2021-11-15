@@ -8,6 +8,7 @@ const UploadFile = () => {
     <>
       <h1>Upload file</h1>
       <Link to="/">Back</Link>
+      <Link to="/login">Log in</Link>
       <Form />
     </>
   );
