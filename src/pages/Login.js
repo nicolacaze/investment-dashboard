@@ -34,30 +34,43 @@ const Login = () => {
   }, [isLoggedIn]);
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div className="bg-gray w-screen h-screen flex">
       <Link to="/">Back</Link>
-      <div>
-        <form onSubmit={formik.handleSubmit}>
+      <div className="h-3/6 w-4/12 max-w-5xl m-auto bg-white rounded p-6 shadow">
+        <h1 className="text-center font-semibold text-xl">Log In</h1>
+        <form
+          className="flex flex-col p-8 h-full"
+          onSubmit={formik.handleSubmit}
+        >
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" {...formik.getFieldProps("email")} />
+          <input
+            id="email"
+            className="px-2 py-2 rounded border-2 border-gray-700"
+            type="email"
+            {...formik.getFieldProps("email")}
+          />
           <label htmlFor="password">Password</label>
           <input
             id="password"
+            className="px-2 py-2 rounded border-2 border-gray-700"
             type="password"
             {...formik.getFieldProps("password")}
           />
+          <button
+            className="mt-5 p-3 bg-dark-gray hover:opacity-80 text-white rounded"
+            type="submit"
+          >
+            Submit
+          </button>
           {formik.touched.email && formik.errors.email ? (
             <div>{formik.errors.email}</div>
           ) : null}
           {formik.touched.password && formik.errors.password ? (
             <div>{formik.errors.password}</div>
           ) : null}
-
-          <button type="submit">Submit</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
