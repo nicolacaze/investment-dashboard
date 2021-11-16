@@ -19,8 +19,6 @@ export function validateForm(values) {
 
   if (!values.password) {
     errors.password = "Password is required";
-  } else if (values.password.length < 8) {
-    errors.password = "Please choose at least 8 characters";
   }
 
   return errors;
