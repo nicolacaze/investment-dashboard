@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from "react";
 import reactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import GoTrue from "gotrue-js";
 
 import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getShares } from "./utils/api";
+import auth from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
-
-const auth = new GoTrue({
-  APIUrl: "https://awesome-kirch-f7213c.netlify.app/.netlify/identity",
-  audience: "",
-  setCookie: false,
-});
 
 const App = () => {
   const [shares, setShares] = useState([]);
   const [user, setUser] = useState(null);
+  const isLoggedIn = !!user && !!user.token;
 
-  const handleLogin = (email, password) => {
-    auth
+  const login = async (email, password) => {
+    return auth
       .login(email, password, true)
-      .then((response) => setUser(response))
-      .catch((error) => {
-        console.log("Failed to login: %o", error);
-      });
+      .then((response) => setUser(response));
   };
 
-  const handleLogout = () => {
+  const logout = () => {
     auth
       .currentUser()
       .logout()
@@ -42,8 +34,9 @@ const App = () => {
 
   const value = {
     user,
-    login: handleLogin,
-    logout: handleLogout,
+    isLoggedIn,
+    login,
+    logout,
   };
 
   useEffect(() => {

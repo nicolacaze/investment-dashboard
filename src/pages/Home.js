@@ -1,18 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Table from "../components/Table";
 import { useAuthContext } from "../context/AuthContext";
 
 const Home = ({ shares }) => {
-  const { user, logout } = useAuthContext();
+  const { isLoggedIn, logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log("Failed to logout: %o", error);
+    }
+  };
+
   return (
     <>
       <h1>This is Home</h1>
       <Link to="/upload-file">Upload file</Link>
-      <Link to="/login">Login</Link>
-      {user && <button onClick={logout}>Log Out</button>}
+      {!isLoggedIn && <Link to="/login">Login</Link>}
+      {isLoggedIn && <button onClick={handleLogout}>Log Out</button>}
       <Table shares={shares} />
     </>
   );

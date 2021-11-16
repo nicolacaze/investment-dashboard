@@ -1,48 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 import { useAuthContext } from "../context/AuthContext";
+import { validateForm } from "../utils";
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const { login } = useAuthContext();
+  const { login, isLoggedIn } = useAuthContext();
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const onSubmit = async (values) => {
+    try {
+      await login(values.email, values.password);
+      navigate("/");
+    } catch (error) {
+      formik.setErrors({ email: error.message });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(form.email, form.password);
-    navigate("/");
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate: validateForm,
+    onSubmit,
+  });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
       <h1>Log In</h1>
       <Link to="/">Back</Link>
       <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email
-            <input
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Password
-            <input
-              name="password"
-              type="password"
-              value={form.password}
-              onChange={handleChange}
-            />
-          </label>
-          <input type="submit" value="Login" />
+        <form onSubmit={formik.handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input id="email" type="email" {...formik.getFieldProps("email")} />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            {...formik.getFieldProps("password")}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
+          {formik.touched.password && formik.errors.password ? (
+            <div>{formik.errors.password}</div>
+          ) : null}
+
+          <button type="submit">Submit</button>
         </form>
       </div>
     </>

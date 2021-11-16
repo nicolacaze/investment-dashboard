@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import { useAuthContext } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useAuthContext();
-  if (!user || !user.token) {
+  const { isLoggedIn } = useAuthContext();
+  if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
 
