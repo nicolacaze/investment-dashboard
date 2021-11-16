@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { queryHasura } = require("./utils/hasura");
 
 exports.handler = async () => {

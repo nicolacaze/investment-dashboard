@@ -1,4 +1,3 @@
-/* eslint-disable */
 const schema = {
   Company: {
     prop: "name",

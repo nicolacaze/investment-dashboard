@@ -10,6 +10,8 @@ import { getShares } from "./utils/api";
 import auth from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
 
+import "./styles.css";
+
 const App = () => {
   const [shares, setShares] = useState([]);
   const [user, setUser] = useState(null);
