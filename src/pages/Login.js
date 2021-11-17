@@ -63,10 +63,14 @@ const Login = () => {
             Submit
           </button>
           {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
+            <div className="bg-yellow-400 rounded mt-5 p-2">
+              {formik.errors.email}
+            </div>
           ) : null}
           {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+            <div className="bg-yellow-400 rounded mt-5 p-2">
+              {formik.errors.password}
+            </div>
           ) : null}
         </form>
       </div>
