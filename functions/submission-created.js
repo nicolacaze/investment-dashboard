@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { queryHasura } = require("./utils/hasura");
 const { parseExcel } = require("./utils/parser");
 

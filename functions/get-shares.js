@@ -1,11 +1,10 @@
-/* eslint-disable */
 const { queryHasura } = require("./utils/hasura");
 
 exports.handler = async () => {
   const { shares } = await queryHasura({
     query: `
       query getShares {
-        shares {
+        shares(limit: 10, order_by: {name: asc}) {
           id
           name
           ticker
@@ -13,13 +12,6 @@ exports.handler = async () => {
           numberOfYears
           price
           dividendYield
-          annualizedDividend
-          threeYearsDividendGrowthRate
-          fiveYearsDividendGrowthRate
-          tenYearsDividendGrowthRate
-          freeCashFlowPerShare
-          fairValue
-          priceEarningsRatio
         }
       }
     `,

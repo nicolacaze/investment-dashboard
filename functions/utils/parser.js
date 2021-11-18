@@ -1,4 +1,3 @@
-/* eslint-disable */
 const readXlsxFile = require("read-excel-file/node");
 const fetch = require("node-fetch");
 const { v4: uuid } = require("uuid");

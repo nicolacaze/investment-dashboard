@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Form from "../components/Form";
+import Layout from "../components/Layout";
 
 const UploadFile = () => {
   return (
-    <>
-      <h1>This is Home</h1>
-      <Link to="/">Back</Link>
+    <Layout>
+      <h1>Upload</h1>
       <Form />
-    </>
+    </Layout>
   );
 };
 
