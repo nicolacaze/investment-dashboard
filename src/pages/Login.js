@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 import { useAuthContext } from "../context/AuthContext";
@@ -35,7 +35,6 @@ const Login = () => {
 
   return (
     <div className="bg-gray w-screen h-screen flex">
-      <Link to="/">Back</Link>
       <div className="h-3/6 w-4/12 max-w-5xl m-auto bg-white rounded p-6 shadow">
         <h1 className="text-center font-semibold text-xl">Log In</h1>
         <form

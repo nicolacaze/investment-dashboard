@@ -17,6 +17,9 @@ module.exports = {
       red: colors.rose,
       yellow: colors.amber,
     },
+    fontFamily: {
+      sans: ["Rajdhani", "sans-serif"],
+    },
   },
   variants: {
     extend: {},

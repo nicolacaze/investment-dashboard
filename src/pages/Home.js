@@ -1,23 +1,14 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Table from "../components/Table";
+import Layout from "../components/Layout";
 import { useAuthContext } from "../context/AuthContext";
 
 const Home = ({ shares }) => {
-  const { isLoggedIn, logout } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
   const navigate = useNavigate();
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    try {
-      await logout();
-      navigate("/login");
-    } catch (error) {
-      console.log("Failed to logout: %o", error);
-    }
-  };
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -26,13 +17,10 @@ const Home = ({ shares }) => {
   }, [isLoggedIn]);
 
   return (
-    <>
-      <h1>This is Home</h1>
-      <Link to="/upload-file">Upload file</Link>
-      {!isLoggedIn && <Link to="/login">Login</Link>}
-      {isLoggedIn && <button onClick={handleLogout}>Log Out</button>}
+    <Layout>
+      <h2 className="text-xl font-semibold mb-6">Dashboard</h2>
       <Table shares={shares} />
-    </>
+    </Layout>
   );
 };
 
