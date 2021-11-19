@@ -5,7 +5,7 @@ import TableRow from "./TableRow";
 
 const Table = ({ shares }) => {
   return (
-    <table className="table-auto w-full">
+    <table className="table-auto w-full text-sm">
       <thead className="text-left">
         <tr>
           <th>Name</th>

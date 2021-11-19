@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const TableRow = ({ share }) => {
   return (
-    <tr>
+    <tr className="h-8 border-b border-dark-gray">
       <td>{share.name}</td>
       <td>{share.ticker}</td>
       <td>{share.industry}</td>
