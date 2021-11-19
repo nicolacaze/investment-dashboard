@@ -32,6 +32,8 @@ Home.propTypes = {
       ticker: PropTypes.string,
       industry: PropTypes.string,
       numberOfYears: PropTypes.number,
+      price: PropTypes.number,
+      dividendYield: PropTypes.number,
     })
   ),
 };

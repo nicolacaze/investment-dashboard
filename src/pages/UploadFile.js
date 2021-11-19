@@ -6,7 +6,6 @@ import Layout from "../components/Layout";
 const UploadFile = () => {
   return (
     <Layout>
-      <h1>Upload</h1>
       <Form />
     </Layout>
   );

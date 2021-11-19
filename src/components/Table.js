@@ -5,7 +5,10 @@ import TableRow from "./TableRow";
 
 const Table = ({ shares }) => {
   return (
-    <table className="table-auto w-full text-sm">
+    <table
+      className="table-auto w-full text-sm"
+      data-testid="shares-table-list"
+    >
       <thead className="text-left">
         <tr>
           <th>Name</th>
@@ -14,16 +17,9 @@ const Table = ({ shares }) => {
           <th>Number of years</th>
           <th>Price</th>
           <th>Dividend yield</th>
-          {/* <th>Annualized dividend</th>
-            <th>3DGR</th>
-            <th>5DGR</th>
-            <th>10DGR</th>
-            <th>Fair value</th>
-            <th>FCF/Share</th>
-            <th>P/E</th> */}
         </tr>
       </thead>
-      <tbody>
+      <tbody data-testid="shares-table-body">
         {shares.length > 0 &&
           shares.map((share) => {
             return <TableRow key={share.id} share={share} />;
@@ -43,13 +39,6 @@ Table.propTypes = {
       numberOfYears: PropTypes.number,
       price: PropTypes.number,
       dividendYield: PropTypes.number,
-      annualizedDividend: PropTypes.number,
-      threeYearsDividendGrowthRate: PropTypes.number,
-      fiveYearsDividendGrowthRate: PropTypes.number,
-      tenYearsDividendGrowthRate: PropTypes.number,
-      fairValue: PropTypes.string,
-      freeCashFlowPerShare: PropTypes.number,
-      priceEarningsRatio: PropTypes.number,
     })
   ),
 };

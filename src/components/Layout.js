@@ -20,7 +20,10 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="flex w-full font-sans h-screen">
+    <div
+      className="flex w-full font-sans h-screen"
+      data-testid="layout-container"
+    >
       <section className="min-w-min flex-initial p-8 bg-gray">
         <h1 className="text-3xl font-semibold mb-8">Wallet</h1>
         <div className="mb-6 flex flex-col items-center">
@@ -29,7 +32,7 @@ const Layout = ({ children }) => {
             src="https://semantic-ui.com/images/avatar/large/elliot.jpg"
             alt="avatar"
           />
-          <p className="font-bold text-xl">{user.user_metadata.full_name}</p>
+          <p className="font-bold text-xl">{user?.user_metadata?.full_name}</p>
         </div>
         <nav className="flex flex-col">
           <Link to="/">Dashboard</Link>
