@@ -31,13 +31,16 @@ const Layout = ({ children }) => {
             className="rounded-full w-20 mb-3"
             src="https://semantic-ui.com/images/avatar/large/elliot.jpg"
             alt="avatar"
+            data-testid="user-avatar"
           />
-          <p className="font-bold text-xl">{user?.user_metadata?.full_name}</p>
+          <p className="font-bold text-xl" data-testid="user-name">
+            {user?.user_metadata?.full_name}
+          </p>
         </div>
         <nav className="flex flex-col">
           <Link to="/">Dashboard</Link>
           <Link to="/upload-file">Upload file</Link>
-          {!isLoggedIn && <Link to="/login">Login</Link>}
+          {!isLoggedIn && <Link to="/login">Log In</Link>}
           {isLoggedIn && (
             <a href="#" onClick={handleLogout}>
               Log Out
@@ -45,7 +48,9 @@ const Layout = ({ children }) => {
           )}
         </nav>
       </section>
-      <section className="p-8 flex-1">{children}</section>
+      <section className="p-8 flex-1" data-testid="rendered-page">
+        {children}
+      </section>
     </div>
   );
 };
