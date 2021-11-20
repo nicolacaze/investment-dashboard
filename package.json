@@ -7,7 +7,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev": "parcel src/index.html",
-    "build": "yarn test && parcel build src/index.html",
+    "build": "jest && parcel build src/index.html",
     "test": "jest --watch"
   },
   "jest": {
