@@ -32,7 +32,5 @@ test("it should navigate to login page if user is logged out", () => {
     providerProps,
   });
 
-  wrapper.debug();
-
   expect(wrapper.container.firstChild.getAttribute("to")).toBe("/login");
 });

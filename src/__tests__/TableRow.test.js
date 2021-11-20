@@ -7,7 +7,11 @@ import TableRow from "../components/TableRow";
 let wrapper;
 
 beforeEach(() => {
-  wrapper = render(<TableRow share={shares[0]} />);
+  const tbody = document.createElement("tbody");
+
+  wrapper = render(<TableRow share={shares[0]} />, {
+    container: document.body.appendChild(tbody),
+  });
 });
 
 test("TableRow component should render without errors", () => {
