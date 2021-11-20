@@ -1,12 +1,12 @@
 import React from "react";
 
-import Form from "../components/Form";
+import UploadForm from "../components/UploadForm";
 import Layout from "../components/Layout";
 
 const UploadFile = () => {
   return (
     <Layout>
-      <Form />
+      <UploadForm />
     </Layout>
   );
 };
