@@ -1,28 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
 
 import { encode } from "../utils";
 
 const Form = () => {
-  const [form, setForm] = useState({});
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const fields = e.target;
+  //   fetch("/", {
+  //     method: "POST",
+  //     body: encode({
+  //       "form-name": fields.getAttribute("name"),
+  //       ...form,
+  //     }),
+  //   }).catch((error) => console.error(error));
+  // };
 
-  const handleAttachment = (e) => {
-    setForm({ [e.target.name]: e.target.files[0] });
+  const onSubmit = async (values) => {
+    try {
+      fetch("/", {
+        method: "POST",
+        body: encode({
+          "file-name": values.file.name,
+          ...values.file,
+        }),
+      });
+    } catch (error) {
+      formik.setErrors({ file: error.file });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const fields = e.target;
-    fetch("/", {
-      method: "POST",
-      body: encode({
-        "form-name": fields.getAttribute("name"),
-        ...form,
-      }),
-    }).catch((error) => console.error(error));
+  const formik = useFormik({
+    initialValues: {
+      file: null,
+    },
+    // validate: validateForm,
+    onSubmit,
+  });
+
+  const handleAttachment = (e) => {
+    formik.setFieldValue("file", e.currentTarget.files[0]);
   };
 
   return (
-    <form name="contact" method="post" onSubmit={handleSubmit}>
+    <form name="contact" method="post" onSubmit={formik.handleSubmit}>
       <input type="hidden" name="form-name" value="contact" />
       <label htmlFor="file">File</label>
       <input id="file" type="file" name="excel" onChange={handleAttachment} />
