@@ -1,22 +1,28 @@
 import React from "react";
 import { useFormik } from "formik";
 
-import { encode } from "../utils";
+import { encode, validateUploadForm } from "../utils";
 
-const Form = () => {
-  const onSubmit = (values) => {
-    fetch("/", {
-      method: "POST",
-      body: encode({
-        "form-name": "upload-file",
-        ...values,
-      }),
-    }).catch((error) => console.error(error));
+const UploadForm = () => {
+  const onSubmit = async (values) => {
+    try {
+      await fetch("/", {
+        method: "POST",
+        body: encode({
+          "form-name": "upload-file",
+          ...values,
+        }),
+      });
+    } catch (error) {
+      formik.setErrors({ file: error.message });
+    }
   };
 
   const formik = useFormik({
-    initialValues: {},
-    // validate: validateForm,
+    initialValues: {
+      file: null,
+    },
+    validate: validateUploadForm,
     onSubmit,
   });
 
@@ -39,8 +45,13 @@ const Form = () => {
           Send
         </button>
       </div>
+      {formik.errors.file ? (
+        <div className="bg-yellow-400 rounded mt-5 p-2">
+          {formik.errors.file}
+        </div>
+      ) : null}
     </form>
   );
 };
 
-export default Form;
+export default UploadForm;

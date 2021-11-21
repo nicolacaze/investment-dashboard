@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 import { useAuthContext } from "../context/AuthContext";
-import { validateForm } from "../utils";
+import { validateLoginForm } from "../utils";
 
 const LoginForm = () => {
   const { login } = useAuthContext();
@@ -23,7 +23,7 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    validate: validateForm,
+    validate: validateLoginForm,
     onSubmit,
   });
 

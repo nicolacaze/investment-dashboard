@@ -8,7 +8,7 @@ export function encode(data) {
   return formData;
 }
 
-export function validateForm(values) {
+export function validateLoginForm(values) {
   const errors = {};
 
   if (!values.email) {
@@ -19,6 +19,18 @@ export function validateForm(values) {
 
   if (!values.password) {
     errors.password = "Password is required";
+  }
+
+  return errors;
+}
+
+export function validateUploadForm(values) {
+  const errors = {};
+
+  if (!values.file) {
+    errors.file = "A file is required";
+  } else if (!/spreadsheetml\.sheet/i.test(values.file.type)) {
+    errors.file = "Only .xlsx file is accepted";
   }
 
   return errors;
