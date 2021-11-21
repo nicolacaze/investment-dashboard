@@ -21,7 +21,7 @@ const Form = () => {
       fetch("/", {
         method: "POST",
         body: encode({
-          "file-name": values.file.name,
+          "form-name": values.file.name,
           ...values.file,
         }),
       });
@@ -43,8 +43,8 @@ const Form = () => {
   };
 
   return (
-    <form name="contact" method="post" onSubmit={formik.handleSubmit}>
-      <input type="hidden" name="form-name" value="contact" />
+    <form name="upload-file" method="post" onSubmit={formik.handleSubmit}>
+      <input type="hidden" name="form-name" value="upload-file" />
       <label htmlFor="file">File</label>
       <input id="file" type="file" name="excel" onChange={handleAttachment} />
       <div className="mt-6">
