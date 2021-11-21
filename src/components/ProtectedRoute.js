@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
-  return <>{children}</>;
+  return <div data-testid="protected-route">{children}</div>;
 };
 
 ProtectedRoute.propTypes = {

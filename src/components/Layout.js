@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 
 const Layout = ({ children }) => {
-  const { isLoggedIn, logout } = useAuthContext();
+  const { user, isLoggedIn, logout } = useAuthContext();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -20,13 +20,27 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="flex w-full font-sans h-screen">
+    <div
+      className="flex w-full font-sans h-screen"
+      data-testid="layout-container"
+    >
       <section className="min-w-min flex-initial p-8 bg-gray">
         <h1 className="text-3xl font-semibold mb-8">Wallet</h1>
+        <div className="mb-6 flex flex-col items-center">
+          <img
+            className="rounded-full w-20 mb-3"
+            src="https://semantic-ui.com/images/avatar/large/elliot.jpg"
+            alt="avatar"
+            data-testid="user-avatar"
+          />
+          <p className="font-bold text-xl" data-testid="user-name">
+            {user?.user_metadata?.full_name}
+          </p>
+        </div>
         <nav className="flex flex-col">
           <Link to="/">Dashboard</Link>
           <Link to="/upload-file">Upload file</Link>
-          {!isLoggedIn && <Link to="/login">Login</Link>}
+          {!isLoggedIn && <Link to="/login">Log In</Link>}
           {isLoggedIn && (
             <a href="#" onClick={handleLogout}>
               Log Out
@@ -34,7 +48,9 @@ const Layout = ({ children }) => {
           )}
         </nav>
       </section>
-      <section className="p-8 flex-1">{children}</section>
+      <section className="p-8 flex-1" data-testid="rendered-page">
+        {children}
+      </section>
     </div>
   );
 };

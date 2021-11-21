@@ -26,5 +26,5 @@
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error"
   },
-  "ignorePatterns": ["src/**/*.test.js", "functions/**/*", "*.config.js"]
+  "ignorePatterns": ["src/**/*.test.js", "functions/**/*", "*.config.js", "src/setupTests.js"]
 }

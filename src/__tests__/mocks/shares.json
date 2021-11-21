@@ -1,0 +1,92 @@
+[
+  {
+  "id": "80bd75bd-d830-42d6-81cc-037d5173ddd9",
+  "name": "1st Source Corporation",
+  "ticker": "SRCE",
+  "industry": "Banks",
+  "numberOfYears": 34,
+  "price": 47.18,
+  "dividendYield": 2.63
+  },
+  {
+  "id": "810021b3-6ca2-41af-a6db-3232d8de4ea5",
+  "name": "3M Company",
+  "ticker": "MMM",
+  "industry": "Industrial Conglomerates",
+  "numberOfYears": 63,
+  "price": 193.44,
+  "dividendYield": 3.06
+  },
+  {
+  "id": "9896a293-f8f5-484a-b96b-c86985a67149",
+  "name": "Aflac Incorporated",
+  "ticker": "AFL",
+  "industry": "Insurance",
+  "numberOfYears": 39,
+  "price": 56.34,
+  "dividendYield": 2.34
+  },
+  {
+  "id": "38380ae1-3388-401e-9d1a-3068490336f7",
+  "name": "Air Products and Chemicals, Inc.",
+  "ticker": "APD",
+  "industry": "Chemicals",
+  "numberOfYears": 39,
+  "price": 269.34,
+  "dividendYield": 2.23
+  },
+  {
+  "id": "36650b6a-2fec-4ae9-ba1d-8e1685c68637",
+  "name": "Alliant Energy Corporation",
+  "ticker": "LNT",
+  "industry": "Electric Utilities",
+  "numberOfYears": 18,
+  "price": 61.64,
+  "dividendYield": 2.61
+  },
+  {
+  "id": "f3ec7fe5-2558-41e5-989d-2a0e407dfe73",
+  "name": "Atmos Energy Corporation",
+  "ticker": "ATO",
+  "industry": "Gas Utilities",
+  "numberOfYears": 37,
+  "price": 98.25,
+  "dividendYield": 2.54
+  },
+  {
+  "id": "053289f2-ead1-4027-8bc0-686e87c5f211",
+  "name": "AT&T Inc.",
+  "ticker": "T",
+  "industry": "Diversified Telecommunication Services",
+  "numberOfYears": 36,
+  "price": 27.19,
+  "dividendYield": 7.65
+  },
+  {
+  "id": "600e8f33-3fe7-45e6-8c25-48f2b90ed085",
+  "name": "BancFirst Corporation",
+  "ticker": "BANF",
+  "industry": "Banks",
+  "numberOfYears": 28,
+  "price": 56.38,
+  "dividendYield": 2.55
+  },
+  {
+  "id": "ecb83e92-95ef-4e75-810f-54be40f9c52e",
+  "name": "Bank of Marin Bancorp",
+  "ticker": "BMRC",
+  "industry": "Banks",
+  "numberOfYears": 16,
+  "price": 36.09,
+  "dividendYield": 2.66
+  },
+  {
+  "id": "b2aae544-e22f-4a8e-81fc-04dd23d3dcab",
+  "name": "Bank OZK",
+  "ticker": "OZK",
+  "industry": "Banks",
+  "numberOfYears": 25,
+  "price": 42.36,
+  "dividendYield": 2.69
+  }
+]

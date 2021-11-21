@@ -1,0 +1,16 @@
+{
+  "id":"a2044b89-d40b-4e3d-a687-52bb8811d7fb",
+  "aud":"",
+  "role":"",
+  "email":"jason.bourne@gmail.com",
+  "confirmed_at":"2021-11-12T15:22:31Z",
+  "confirmation_sent_at":"2021-11-12T15:21:34Z",
+  "app_metadata":{
+     "provider":"email"
+  },
+  "user_metadata":{
+     "full_name":"Jason Bourne"
+  },
+  "created_at":"2021-11-12T15:21:34Z",
+  "updated_at":"2021-11-12T15:21:34Z"
+}
