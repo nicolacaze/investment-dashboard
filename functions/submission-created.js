@@ -3,6 +3,7 @@ const { parseExcel } = require("./utils/parser");
 
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
+  console.log(body);
   const excelFileURL = body.payload.human_fields.Excel;
   const data = await parseExcel(excelFileURL);
 
