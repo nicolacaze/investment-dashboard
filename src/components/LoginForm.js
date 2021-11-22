@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 import { useAuthContext } from "../context/AuthContext";
-import { validateForm } from "../utils";
+import { validateLoginForm } from "../utils";
 
 const LoginForm = () => {
   const { login } = useAuthContext();
@@ -23,12 +23,16 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    validate: validateForm,
+    validate: validateLoginForm,
     onSubmit,
   });
 
   return (
-    <form className="flex flex-col p-8 h-full" onSubmit={formik.handleSubmit}>
+    <form
+      name="user-login"
+      className="flex flex-col p-8 h-full"
+      onSubmit={formik.handleSubmit}
+    >
       <label htmlFor="email">Email</label>
       <input
         id="email"

@@ -1,8 +1,6 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { screen } from "@testing-library/react";
 
-import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { renderWithAuthAndRouter } from "../setupTests";
 
@@ -12,15 +10,12 @@ test("ProtectedRoute should render its children if user is logged in", () => {
     value: { isLoggedIn },
   };
   const testUi = <div>Hello test</div>;
-  const wrapper = renderWithAuthAndRouter(
-    <ProtectedRoute>{testUi}</ProtectedRoute>,
-    {
-      providerProps,
-    }
-  );
-  const renderedPage = wrapper.getByTestId("protected-route");
+  renderWithAuthAndRouter(<ProtectedRoute>{testUi}</ProtectedRoute>, {
+    providerProps,
+  });
+  const renderedPage = screen.getByTestId("protected-route");
 
-  expect(renderedPage.children.item("div").textContent).toBe("Hello test");
+  expect(renderedPage.children.item("div")).toHaveTextContent("Hello test");
 });
 
 test("it should navigate to login page if user is logged out", () => {
@@ -28,9 +23,9 @@ test("it should navigate to login page if user is logged out", () => {
   const providerProps = {
     value: { isLoggedIn },
   };
-  const wrapper = renderWithAuthAndRouter(<ProtectedRoute />, {
+  const { container } = renderWithAuthAndRouter(<ProtectedRoute />, {
     providerProps,
   });
 
-  expect(wrapper.container.firstChild.getAttribute("to")).toBe("/login");
+  expect(container.firstChild.getAttribute("to")).toBe("/login");
 });
