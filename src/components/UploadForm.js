@@ -20,7 +20,7 @@ const UploadForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      file: null,
+      file: "",
     },
     validate: validateUploadForm,
     onSubmit,
@@ -34,17 +34,20 @@ const UploadForm = () => {
 
   return (
     <form name="upload-file" method="post" onSubmit={formik.handleSubmit}>
-      <input type="hidden" name="form-name" value="upload-file" />
+      <input
+        type="hidden"
+        name="form-name"
+        value="upload-file"
+        alt="hidden-netlify-input"
+      />
       <label htmlFor="file">File</label>
       <input id="file" type="file" name="file" onChange={handleAttachment} />
-      <div className="mt-6">
-        <button
-          className="bg-dark-gray text-white font-semibold px-6 py-2 rounded"
-          type="submit"
-        >
-          Send
-        </button>
-      </div>
+      <button
+        className="mt-6 bg-dark-gray text-white font-semibold px-6 py-2 rounded"
+        type="submit"
+      >
+        Send
+      </button>
       {formik.errors.file ? (
         <div className="bg-yellow-400 rounded mt-5 p-2">
           {formik.errors.file}

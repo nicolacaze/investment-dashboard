@@ -30,3 +30,5 @@ jest.mock("react-router-dom", () => {
     Navigate,
   };
 });
+
+global.fetch = jest.fn();

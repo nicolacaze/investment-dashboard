@@ -28,7 +28,11 @@ const LoginForm = () => {
   });
 
   return (
-    <form className="flex flex-col p-8 h-full" onSubmit={formik.handleSubmit}>
+    <form
+      name="user-login"
+      className="flex flex-col p-8 h-full"
+      onSubmit={formik.handleSubmit}
+    >
       <label htmlFor="email">Email</label>
       <input
         id="email"
