@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import reactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -6,61 +6,30 @@ import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { getShares } from "./utils/api";
 import auth from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
+import endpoint from "./utils/api";
+import useFetch from "./hooks/useFetch";
 
 import "./styles.css";
 
-const initialState = {
-  user: null,
-  data: {
-    champions: [],
-    shares: [],
-  },
-};
-
-const SET_USER = "SET_USER";
-const GET_SHARES = "GET_SHARES";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case SET_USER:
-      return { ...state, user: action.payload.user };
-    case GET_SHARES:
-      return {
-        ...state,
-        data: {
-          champions: action.payload.champions,
-          shares: action.payload.shares,
-        },
-      };
-  }
-  return state;
-};
-
-const setUser = (data) => {
-  if (!data) {
-    return { type: SET_USER, payload: { user: null } };
-  }
-  return { type: SET_USER, payload: { user: data } };
-};
-
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const isLoggedIn = !!state.user && !!state.user.token;
+  const [user, setUser] = useState(null);
+  const [loading, response] = useFetch(endpoint + "/get-shares");
+  const shares = (response && response.shares) || [];
+  const champions = (response && response.champions) || [];
+
+  const isLoggedIn = !!user && !!user.token;
 
   const login = async (email, password) => {
-    return auth
-      .login(email, password, true)
-      .then((user) => dispatch(setUser(user)));
+    return auth.login(email, password, true).then((user) => setUser(user));
   };
 
   const logout = () => {
     auth
       .currentUser()
       .logout()
-      .then(() => dispatch(setUser(null)))
+      .then(() => setUser(null))
       .catch((error) => {
         console.log("Failed to logout user: %o", error);
         throw error;
@@ -68,7 +37,8 @@ const App = () => {
   };
 
   const value = {
-    user: state.user,
+    loading,
+    user,
     isLoggedIn,
     login,
     logout,
@@ -76,12 +46,7 @@ const App = () => {
 
   useEffect(() => {
     const user = auth.currentUser();
-    dispatch(setUser(user));
-    getShares()
-      .then(({ champions, shares }) => {
-        dispatch({ type: GET_SHARES, payload: { champions, shares } });
-      })
-      .catch((error) => console.log(error));
+    setUser(user);
   }, []);
 
   return (
@@ -90,12 +55,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <Home
-                champions={state.data.champions}
-                shares={state.data.shares}
-              />
-            }
+            element={<Home champions={champions} shares={shares} />}
           />
           <Route
             path="upload-file"

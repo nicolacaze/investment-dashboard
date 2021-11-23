@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 import { useAuthContext } from "../context/AuthContext";
 
 const Home = ({ champions, shares }) => {
-  const { isLoggedIn } = useAuthContext();
+  const { isLoggedIn, loading } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +16,11 @@ const Home = ({ champions, shares }) => {
     }
   }, [isLoggedIn]);
 
-  return (
+  return loading ? (
+    <Layout>
+      <p>Loading...</p>
+    </Layout>
+  ) : (
     <Layout>
       <h2 className="text-xl font-semibold mb-6">Dashboard</h2>
       <div className="flex flex-col justify-evenly h-full">
