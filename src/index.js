@@ -32,7 +32,11 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<Home champions={champions} shares={shares} />}
+            element={
+              <ProtectedRoute>
+                <Home champions={champions} shares={shares} />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="upload-file"

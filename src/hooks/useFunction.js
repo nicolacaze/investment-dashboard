@@ -12,20 +12,19 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOADING":
       return {
+        ...state,
         loading: true,
-        response: null,
-        error: null,
       };
     case "RESPONSE_COMPLETE":
       return {
+        ...state,
         loading: false,
         response: action.payload.data,
-        error: null,
       };
     case "ERROR":
       return {
+        ...state,
         loading: false,
-        response: null,
         error: action.payload.error,
       };
   }

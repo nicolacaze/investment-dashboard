@@ -37,7 +37,7 @@ const useIdentity = () => {
       .catch((error) => dispatch({ type: "USER_ERROR", payload: { error } }));
   };
 
-  const logout = () => {
+  const logout = async () => {
     return auth
       .currentUser()
       .logout()

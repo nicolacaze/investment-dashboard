@@ -1,24 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 
 import Table from "../components/Table";
 import Layout from "../components/Layout";
+import Loader from "../components/Loader";
 import { useAuthContext } from "../context/AuthContext";
 
 const Home = ({ champions, shares }) => {
-  const { isLoggedIn, loading } = useAuthContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    }
-  }, [isLoggedIn]);
+  const { loading } = useAuthContext();
 
   return loading ? (
     <Layout>
-      <p>Loading...</p>
+      <Loader />
     </Layout>
   ) : (
     <Layout>
