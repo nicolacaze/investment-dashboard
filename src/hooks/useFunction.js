@@ -1,5 +1,7 @@
 import { useEffect, useReducer } from "react";
 
+import { functionsEndpoint } from "../utils/api";
+
 const initialState = {
   loading: false,
   response: null,
@@ -17,7 +19,7 @@ const reducer = (state, action) => {
     case "RESPONSE_COMPLETE":
       return {
         loading: false,
-        response: action.payload.response,
+        response: action.payload.data,
         error: null,
       };
     case "ERROR":
@@ -30,18 +32,19 @@ const reducer = (state, action) => {
   return state;
 };
 
-const useFetch = (url) => {
+const useFunction = (path) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     dispatch({ type: "LOADING" });
 
-    fetch(url)
+    fetch(functionsEndpoint + path)
       .then((response) => response.json())
-      .then((response) => {
-        dispatch({ type: "RESPONSE_COMPLETE", payload: { response } });
+      .then((data) => {
+        dispatch({ type: "RESPONSE_COMPLETE", payload: { data } });
       })
       .catch((error) => {
+        console.log("ERROR", error);
         dispatch({ type: "ERROR", payload: { error } });
       });
   }, []);
@@ -49,4 +52,4 @@ const useFetch = (url) => {
   return [state.loading, state.response, state.error];
 };
 
-export default useFetch;
+export default useFunction;

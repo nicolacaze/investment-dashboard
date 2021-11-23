@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import reactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -6,35 +6,17 @@ import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import auth from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
-import endpoint from "./utils/api";
-import useFetch from "./hooks/useFetch";
+import useFunction from "./hooks/useFunction";
+import useIdentity from "./hooks/useIdentity";
 
 import "./styles.css";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [loading, response] = useFetch(endpoint + "/get-shares");
+  const [loading, response] = useFunction("/get-shares");
+  const { user, isLoggedIn, login, logout } = useIdentity();
   const shares = (response && response.shares) || [];
   const champions = (response && response.champions) || [];
-
-  const isLoggedIn = !!user && !!user.token;
-
-  const login = async (email, password) => {
-    return auth.login(email, password, true).then((user) => setUser(user));
-  };
-
-  const logout = () => {
-    auth
-      .currentUser()
-      .logout()
-      .then(() => setUser(null))
-      .catch((error) => {
-        console.log("Failed to logout user: %o", error);
-        throw error;
-      });
-  };
 
   const value = {
     loading,
@@ -43,11 +25,6 @@ const App = () => {
     login,
     logout,
   };
-
-  useEffect(() => {
-    const user = auth.currentUser();
-    setUser(user);
-  }, []);
 
   return (
     <AuthProvider value={value}>
