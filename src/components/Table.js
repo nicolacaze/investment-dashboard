@@ -9,17 +9,20 @@ const Table = ({ shares }) => {
       className="table-auto w-full text-sm"
       data-testid="shares-table-list"
     >
-      <thead className="text-left">
-        <tr>
-          <th>Name</th>
-          <th>Ticker</th>
-          <th>Industry</th>
-          <th>Number of years</th>
-          <th>Price</th>
-          <th>Dividend yield</th>
+      <thead className="text-left block">
+        <tr className="flex">
+          <th className="w-2/12">Name</th>
+          <th className="w-2/12">Ticker</th>
+          <th className="w-2/12">Industry</th>
+          <th className="w-2/12">Number of years</th>
+          <th className="w-2/12">Price</th>
+          <th className="w-2/12">Dividend yield</th>
         </tr>
       </thead>
-      <tbody data-testid="shares-table-body">
+      <tbody
+        className="block overflow-y-scroll h-80"
+        data-testid="shares-table-body"
+      >
         {shares.length > 0 &&
           shares.map((share) => {
             return <TableRow key={share.id} share={share} />;

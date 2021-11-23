@@ -38,11 +38,15 @@ const Layout = ({ children }) => {
           </p>
         </div>
         <nav className="flex flex-col">
-          <Link to="/">Dashboard</Link>
-          <Link to="/upload-file">Upload file</Link>
+          <Link className="hover:opacity-60" to="/">
+            Dashboard
+          </Link>
+          <Link className="hover:opacity-60" to="/upload-file">
+            Upload file
+          </Link>
           {!isLoggedIn && <Link to="/login">Log In</Link>}
           {isLoggedIn && (
-            <a href="#" onClick={handleLogout}>
+            <a className="hover:opacity-60" href="#" onClick={handleLogout}>
               Log Out
             </a>
           )}

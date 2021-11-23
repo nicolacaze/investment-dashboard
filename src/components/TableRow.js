@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 const TableRow = ({ share }) => {
   return (
     <tr className="h-8 border-b border-dark-gray">
-      <td>{share.name}</td>
-      <td>{share.ticker}</td>
-      <td>{share.industry}</td>
-      <td>{share.numberOfYears}</td>
-      <td>{share.price}</td>
-      <td>{share.dividendYield}</td>
+      <td className="w-2/12">{share.name}</td>
+      <td className="w-2/12">{share.ticker}</td>
+      <td className="w-2/12">{share.industry}</td>
+      <td className="w-2/12">{share.numberOfYears}</td>
+      <td className="w-2/12">{share.price}</td>
+      <td className="w-2/12">{share.dividendYield}</td>
     </tr>
   );
 };
