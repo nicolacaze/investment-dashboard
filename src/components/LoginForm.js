@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAppContext } from "../context/AppContext";
 import { validateLoginForm } from "../utils";
 
 const LoginForm = () => {
-  const { login } = useAuthContext();
+  const { login } = useAppContext();
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
@@ -14,7 +14,7 @@ const LoginForm = () => {
       await login(values.email, values.password);
       navigate("/");
     } catch (error) {
-      formik.setErrors({ email: error.message });
+      formik.setErrors({ email: error.json.error_description });
     }
   };
 

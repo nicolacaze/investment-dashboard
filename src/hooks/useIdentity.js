@@ -33,8 +33,7 @@ const useIdentity = () => {
   const login = async (email, password) => {
     return auth
       .login(email, password, true)
-      .then((user) => dispatch({ type: "SET_USER", payload: { user } }))
-      .catch((error) => dispatch({ type: "USER_ERROR", payload: { error } }));
+      .then((user) => dispatch({ type: "SET_USER", payload: { user } }));
   };
 
   const logout = async () => {
@@ -50,7 +49,7 @@ const useIdentity = () => {
     dispatch({ type: "SET_USER", payload: { user } });
   }, []);
 
-  return { user: state.user, isLoggedIn, login, logout };
+  return { user: state.user, isLoggedIn, login, logout, error: state.error };
 };
 
 export default useIdentity;

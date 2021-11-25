@@ -6,7 +6,7 @@ import TableRow from "./TableRow";
 const Table = ({ shares }) => {
   return (
     <table
-      className="table-auto w-full text-sm"
+      className="table-auto w-full text-sm max-w-6xl"
       data-testid="shares-table-list"
     >
       <thead className="text-left block">

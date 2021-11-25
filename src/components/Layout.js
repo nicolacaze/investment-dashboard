@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAppContext } from "../context/AppContext";
 
 const Layout = ({ children }) => {
-  const { user, isLoggedIn, logout } = useAuthContext();
+  const { user, isLoggedIn, logout } = useAppContext();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {

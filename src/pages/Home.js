@@ -4,11 +4,8 @@ import PropTypes from "prop-types";
 import Table from "../components/Table";
 import Layout from "../components/Layout";
 import Loader from "../components/Loader";
-import { useAuthContext } from "../context/AuthContext";
 
-const Home = ({ champions, shares }) => {
-  const { loading } = useAuthContext();
-
+const Home = ({ loading, champions, shares }) => {
   return loading ? (
     <Layout>
       <Loader />
@@ -17,11 +14,11 @@ const Home = ({ champions, shares }) => {
     <Layout>
       <h2 className="text-xl font-semibold mb-6">Dashboard</h2>
       <div className="flex flex-col justify-evenly h-full">
-        <div className="flex justify-between">
+        <div className="flex justify-center max-w-6xl">
           {champions.map((champion) => (
             <div
               key={champion.id}
-              className="bg-light-khaki h-48 p-3 rounded w-60 mx-4 shadow-lg grid text-xl"
+              className="bg-light-khaki h-48 p-3 rounded w-60 mx-10 shadow-lg grid text-xl"
             >
               <h5>{champion.name}</h5>
               <p className="justify-self-end self-end text-3xl">
@@ -37,6 +34,7 @@ const Home = ({ champions, shares }) => {
 };
 
 Home.propTypes = {
+  loading: PropTypes.bool,
   champions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

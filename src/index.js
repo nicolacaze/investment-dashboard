@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import reactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -6,35 +6,45 @@ import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
-import useFunction from "./hooks/useFunction";
+import { AppProvider } from "./context/AppContext";
+import useThunkReducer from "./hooks/useThunkReducer";
 import useIdentity from "./hooks/useIdentity";
+import initialState from "./state/initialState";
+import reducer from "./state/reducer";
+import { fetchShares } from "./state/thunks";
 
 import "./styles.css";
 
 const App = () => {
-  const [loading, response] = useFunction("/get-shares");
+  const [state, dispatch] = useThunkReducer(reducer, initialState);
   const { user, isLoggedIn, login, logout } = useIdentity();
-  const shares = (response && response.shares) || [];
-  const champions = (response && response.champions) || [];
+  const { ui, data } = state;
 
   const value = {
-    loading,
     user,
     isLoggedIn,
     login,
     logout,
+    dispatch,
   };
 
+  useEffect(() => {
+    dispatch(fetchShares);
+  }, [dispatch]);
+
   return (
-    <AuthProvider value={value}>
+    <AppProvider value={value}>
       <Router>
         <Routes>
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <Home champions={champions} shares={shares} />
+                <Home
+                  loading={ui.loading}
+                  champions={data.champions}
+                  shares={data.shares}
+                />
               </ProtectedRoute>
             }
           />
@@ -49,7 +59,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
         </Routes>
       </Router>
-    </AuthProvider>
+    </AppProvider>
   );
 };
 
