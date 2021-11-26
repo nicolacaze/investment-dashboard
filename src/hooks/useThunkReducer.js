@@ -6,7 +6,7 @@ const useThunkReducer = (reducer, initialState) => {
   const thunkDispatch = useCallback(
     (action) => {
       if (typeof action === "function") {
-        action(dispatch, state);
+        action(dispatch);
       } else {
         dispatch(action);
       }

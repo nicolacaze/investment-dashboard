@@ -1,4 +1,4 @@
-import { LOADING, FETCH_SHARES, ERROR } from "./actionTypes";
+import { LOADING, FETCH_SHARES, ERROR, SORT_SHARES } from "./actionTypes";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +20,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         ui: { loading: false, error: action.payload.error },
+      };
+    case SORT_SHARES:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          shares: action.payload.shares,
+        },
       };
   }
   return state;

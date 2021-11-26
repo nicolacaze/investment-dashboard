@@ -1,7 +1,7 @@
 import { functionsEndpoint } from "../utils/api";
-import { LOADING, FETCH_SHARES, ERROR } from "./actionTypes";
+import { LOADING, FETCH_SHARES, ERROR, SORT_SHARES } from "./actionTypes";
 
-export const fetchShares = (dispatch) => {
+export const fetchShares = () => (dispatch) => {
   dispatch({ type: LOADING });
   fetch(functionsEndpoint + "/get-shares")
     .then((response) => response.json())
@@ -14,4 +14,14 @@ export const fetchShares = (dispatch) => {
     .catch((error) => {
       dispatch({ type: ERROR, payload: { error } });
     });
+};
+
+export const sortBy = (shares, order, column) => (dispatch) => {
+  let sortedShares;
+  if (order === "ASC") {
+    sortedShares = shares.sort((a, b) => a[column] - b[column]);
+  } else if (order === "DESC") {
+    sortedShares = shares.sort((a, b) => b[column] - a[column]);
+  }
+  dispatch({ type: SORT_SHARES, payload: { shares: sortedShares } });
 };
