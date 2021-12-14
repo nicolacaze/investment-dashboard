@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import TableRow from "./TableRow";
 import { useAppContext } from "../context/AppContext";
 import { sortBy } from "../state/thunks";
+import chevron from "./noun_chevron_2472853.svg";
 
 const Table = ({ shares }) => {
   const [numberOfYearsOrder, setNumberOfYearsOrder] = useState("ASC");
@@ -40,14 +41,44 @@ const Table = ({ shares }) => {
           <th className="w-2/12">Name</th>
           <th className="w-2/12">Ticker</th>
           <th className="w-2/12">Industry</th>
-          <th className="w-2/12" onClick={handleSortByNumberOfYears}>
-            Number of years
+          <th
+            className="flex items-center w-2/12 cursor-pointer"
+            onClick={handleSortByNumberOfYears}
+          >
+            <span>Number of years</span>
+            <img
+              className={`w-4 ml-1${
+                numberOfYearsOrder === "ASC" ? " transform rotate-180" : ""
+              }`}
+              src={chevron}
+              alt="chevron"
+            />
           </th>
-          <th className="w-2/12" onClick={handleSortByPrice}>
-            Price
+          <th
+            className="flex items-center w-2/12 cursor-pointer"
+            onClick={handleSortByPrice}
+          >
+            <span>Price</span>
+            <img
+              className={`w-4 ml-1${
+                priceOrder === "ASC" ? " transform rotate-180" : ""
+              }`}
+              src={chevron}
+              alt="chevron"
+            />
           </th>
-          <th className="w-2/12" onClick={handleSortByDividenYield}>
-            Dividend yield
+          <th
+            className="flex items-center w-2/12 cursor-pointer"
+            onClick={handleSortByDividenYield}
+          >
+            <span>Dividend yield</span>
+            <img
+              className={`w-4 ml-1${
+                dividendYieldOrder === "ASC" ? " transform rotate-180" : ""
+              }`}
+              src={chevron}
+              alt="chevron"
+            />
           </th>
         </tr>
       </thead>
