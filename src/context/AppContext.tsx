@@ -1,10 +1,19 @@
 import React, { createContext, useContext, ReactNode } from "react";
 
 type IdentityContext = {
-  dispatch: () => void;
+  user: {};
+  isLoggedIn: boolean;
+  login?: Function;
+  logout?: Function;
+  dispatch?: Function;
 };
 
-const AppContext = createContext<IdentityContext | {}>({});
+const defaultContext = {
+  user: {},
+  isLoggedIn: false,
+};
+
+const AppContext = createContext<IdentityContext>(defaultContext);
 
 const AppProvider = ({
   value,
