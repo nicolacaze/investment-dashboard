@@ -1,12 +1,13 @@
 import { useReducer, useCallback, Dispatch } from "react";
 
-type ThunkAction = Action | ((dispatch: Dispatch<Action>) => void);
-
 const useThunkReducer = (reducer: () => AppState, initialState: AppState) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch]: [AppState, Dispatch<Action>] = useReducer(
+    reducer,
+    initialState
+  );
 
   const thunkDispatch = useCallback(
-    (action: ThunkAction) => {
+    (action) => {
       if (typeof action === "function") {
         action(dispatch);
       } else {
