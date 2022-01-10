@@ -9,9 +9,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AppProvider } from "./context/AppContext";
 import useThunkReducer from "./hooks/useThunkReducer";
 import useIdentity from "./hooks/useIdentity";
-import initialState from "./state/initialState";
-import reducer from "./state/reducer";
-import { fetchShares } from "./state/thunks";
+import initialState from "./hooks/initialState";
+import reducer from "./hooks/reducer";
+import { fetchShares } from "./hooks/thunks";
 
 import "./styles.css";
 
