@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../context/AppContext";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoggedIn, logout } = useAppContext();
   const navigate = useNavigate();
 
@@ -57,10 +56,6 @@ const Layout = ({ children }) => {
       </section>
     </div>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node,
 };
 
 export default Layout;
