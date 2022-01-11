@@ -1,7 +1,13 @@
 import React, { createContext, useContext, ReactNode } from "react";
 
+type User = {
+  user_metadata: {
+    full_name: string;
+  };
+};
+
 type IdentityContext = {
-  user: {};
+  user: User;
   isLoggedIn: boolean;
   login?: Function;
   logout?: Function;
@@ -9,7 +15,11 @@ type IdentityContext = {
 };
 
 const defaultContext = {
-  user: {},
+  user: {
+    user_metadata: {
+      full_name: "",
+    },
+  },
   isLoggedIn: false,
 };
 
