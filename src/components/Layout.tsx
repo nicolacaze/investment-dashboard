@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAppContext } from "../context/AppContext";
 
-const Layout = ({ children }) => {
-  const { user, isLoggedIn, logout } = useAuthContext();
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { user, isLoggedIn, logout } = useAppContext();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -38,11 +37,15 @@ const Layout = ({ children }) => {
           </p>
         </div>
         <nav className="flex flex-col">
-          <Link to="/">Dashboard</Link>
-          <Link to="/upload-file">Upload file</Link>
+          <Link className="hover:opacity-60" to="/">
+            Dashboard
+          </Link>
+          <Link className="hover:opacity-60" to="/upload-file">
+            Upload file
+          </Link>
           {!isLoggedIn && <Link to="/login">Log In</Link>}
           {isLoggedIn && (
-            <a href="#" onClick={handleLogout}>
+            <a className="hover:opacity-60" href="#" onClick={handleLogout}>
               Log Out
             </a>
           )}
@@ -53,10 +56,6 @@ const Layout = ({ children }) => {
       </section>
     </div>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node,
 };
 
 export default Layout;

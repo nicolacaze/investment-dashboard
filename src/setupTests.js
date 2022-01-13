@@ -3,16 +3,16 @@ import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-import { AuthProvider } from "./context/AuthContext";
+import { AppProvider } from "./context/AppContext";
 
 export const renderWithAuthAndRouter = (
   ui,
   { providerProps, ...renderOptions }
 ) => {
   return render(
-    <AuthProvider {...providerProps}>
+    <AppProvider {...providerProps}>
       <Router>{ui}</Router>
-    </AuthProvider>,
+    </AppProvider>,
     renderOptions
   );
 };

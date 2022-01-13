@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import reactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -6,54 +6,48 @@ import Home from "./pages/Home";
 import UploadFile from "./pages/UploadFile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { getShares } from "./utils/api";
-import auth from "./utils/auth";
-import { AuthProvider } from "./context/AuthContext";
+import { AppProvider } from "./context/AppContext";
+import useThunkReducer from "./hooks/useThunkReducer";
+import useIdentity from "./hooks/useIdentity";
+import initialState from "./hooks/initialState";
+import reducer from "./hooks/reducer";
+import { fetchShares } from "./hooks/thunks";
 
 import "./styles.css";
 
 const App = () => {
-  const [shares, setShares] = useState([]);
-  const [user, setUser] = useState(null);
-  const isLoggedIn = !!user && !!user.token;
-
-  const login = async (email, password) => {
-    return auth
-      .login(email, password, true)
-      .then((response) => setUser(response));
-  };
-
-  const logout = () => {
-    auth
-      .currentUser()
-      .logout()
-      .then(() => setUser(null))
-      .catch((error) => {
-        console.log("Failed to logout user: %o", error);
-        throw error;
-      });
-  };
+  const [state, dispatch] = useThunkReducer(reducer, initialState);
+  const { user, isLoggedIn, login, logout } = useIdentity();
+  const { ui, data } = state;
 
   const value = {
     user,
     isLoggedIn,
     login,
     logout,
+    dispatch,
   };
 
   useEffect(() => {
-    const user = auth.currentUser();
-    setUser(user);
-    getShares()
-      .then((shares) => setShares(shares))
-      .catch((error) => console.log(error));
-  }, []);
+    dispatch(fetchShares());
+  }, [dispatch]);
 
   return (
-    <AuthProvider value={value}>
+    <AppProvider value={value}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home shares={shares} />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home
+                  loading={ui.loading}
+                  champions={data.champions}
+                  shares={data.shares}
+                />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="upload-file"
             element={
@@ -65,7 +59,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
         </Routes>
       </Router>
-    </AuthProvider>
+    </AppProvider>
   );
 };
 

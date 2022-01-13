@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAppContext } from "../context/AppContext";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
-  const { isLoggedIn } = useAuthContext();
+  const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
 
   useEffect(() => {

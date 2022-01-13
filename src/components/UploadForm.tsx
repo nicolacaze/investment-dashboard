@@ -20,15 +20,15 @@ const UploadForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      file: "",
+      file: null,
     },
     validate: validateUploadForm,
     onSubmit,
   });
 
-  const handleAttachment = (e) => {
+  const handleAttachment = (e: React.ChangeEvent<HTMLInputElement>) => {
     formik.setValues({
-      [e.target.name]: e.target.files[0],
+      file: e.target.files[0],
     });
   };
 
