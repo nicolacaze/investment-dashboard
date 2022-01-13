@@ -1,11 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import Table from "../components/Table";
 import Layout from "../components/Layout";
 import Loader from "../components/Loader";
 
-const Home = ({ loading, champions, shares }) => {
+type HomeProps = {
+  loading: boolean;
+  champions: Share[];
+  shares: Share[];
+};
+
+const Home = ({ loading, champions, shares }: HomeProps) => {
   return loading ? (
     <Layout>
       <Loader />
@@ -31,32 +36,6 @@ const Home = ({ loading, champions, shares }) => {
       </div>
     </Layout>
   );
-};
-
-Home.propTypes = {
-  loading: PropTypes.bool,
-  champions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      ticker: PropTypes.string,
-      industry: PropTypes.string,
-      numberOfYears: PropTypes.number,
-      price: PropTypes.number,
-      dividendYield: PropTypes.number,
-    })
-  ),
-  shares: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      ticker: PropTypes.string,
-      industry: PropTypes.string,
-      numberOfYears: PropTypes.number,
-      price: PropTypes.number,
-      dividendYield: PropTypes.number,
-    })
-  ),
 };
 
 export default Home;

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TableRow from "./TableRow";
 import { useAppContext } from "../context/AppContext";
 import { sortBy } from "../hooks/thunks";
-import chevron from "./noun_chevron_2472853.svg";
+import chevron from "../static/noun_chevron_2472853.svg";
 
 type TableProps = {
   shares: Share[];
@@ -92,9 +92,7 @@ const Table = ({ shares }: TableProps) => {
         data-testid="shares-table-body"
       >
         {shares.length > 0 &&
-          shares.map((share) => {
-            return <TableRow key={share.id} share={share} />;
-          })}
+          shares.map((share) => <TableRow key={share.id} share={share} />)}
       </tbody>
     </table>
   );

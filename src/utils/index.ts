@@ -9,7 +9,10 @@ export function encode(data) {
 }
 
 export function validateLoginForm(values) {
-  const errors = {};
+  const errors = {
+    email: "",
+    password: "",
+  };
 
   if (!values.email) {
     errors.email = "Email is required";
@@ -25,7 +28,9 @@ export function validateLoginForm(values) {
 }
 
 export function validateUploadForm(values) {
-  const errors = {};
+  const errors = {
+    file: "",
+  };
 
   if (!values.file) {
     errors.file = "A file is required";
